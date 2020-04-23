@@ -92,3 +92,12 @@ class SurveyData:
     def getSurveyData(self):
 
         return tuple(self.dataList)
+
+class Job:
+
+    def __init__( self, jobName = None ):
+
+        self.jobName = jobName
+        self.surveyFilelist = list()
+
+    
