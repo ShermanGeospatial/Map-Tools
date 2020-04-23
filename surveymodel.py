@@ -5,8 +5,8 @@
 class SurveyModel:
     def __init__( self ):
 
-        self.fileName = None
-        self.surveyData = None
+        self.fileNameList = list()
+        self.surveyDataDict = dict()
 
     def isValid( self, fileName ):
 
@@ -17,22 +17,19 @@ class SurveyModel:
         except:
             return False
 
-    def setFileName( self, fileName ):
+    def addFileName( self, fileName ):
 
         if self.isValid( fileName ):
-            self.fileName = fileName
-            self.surveyData = SurveyData(self.fileName)
-        else:
-            self.fileContents = ""
-            self.fileName = ""
+            self.fileNameList.append(fileName)
+            self.surveyDataDict[fileName] = SurveyData(fileName)
             
     def getFileName( self ):
 
-        return self.fileName
+        return self.fileNameList[-1]
 
     def getSurveyData(self):
 
-        return self.surveyData.getSurveyData()
+        return self.surveyDataDict[self.fileNameList[-1]].getSurveyData()
 
 class SurveyPoint:
 
@@ -93,11 +90,16 @@ class SurveyData:
 
         return tuple(self.dataList)
 
-class Job:
+class Job(SurveyModel):
 
     def __init__( self, jobName = None ):
 
+        super().__init__()
         self.jobName = jobName
-        self.surveyFilelist = list()
+        self.currentFile = None
+
+    def getJobName(self):
+
+        return self.jobName
 
     
