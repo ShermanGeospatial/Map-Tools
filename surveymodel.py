@@ -1,12 +1,15 @@
 # surveymodel.py
 # D. Sherman
 # A basic model for storing and manipulating survey data loaded from a text file
+from PyQt5 import QtCore
+from PyQt5.QtCore import Qt
 
 class SurveyModel:
     def __init__( self ):
 
         self.fileNameList = list()
         self.surveyDataDict = dict()
+        self.pointDict = dict()
 
     def isValid( self, fileName ):
 
@@ -22,7 +25,8 @@ class SurveyModel:
         if self.isValid( fileName ):
             self.fileNameList.append(fileName)
             self.surveyDataDict[fileName] = SurveyData(fileName)
-            
+            self.pointDict.update(self.getSurveyData())
+
     def getFileName( self ):
 
         return self.fileNameList[-1]
@@ -30,6 +34,39 @@ class SurveyModel:
     def getSurveyData(self):
 
         return self.surveyDataDict[self.fileNameList[-1]].getSurveyData()
+
+    def getPointTable(self):
+
+        pointTable = list()
+
+        for pointKeys in self.pointDict.keys():
+
+            point = self.pointDict[pointKeys]
+
+            pointTable.append([point.num,point.northing,point.easting,point.height,point.description])
+            
+        return PointTableModel(pointTable)
+
+class PointTableModel(QtCore.QAbstractTableModel):
+
+    def __init__(self,data):
+
+        super(PointTableModel,self).__init__()
+        self._data = data
+
+    def data(self,index,role):
+
+        if role == Qt.DisplayRole:
+
+            return self._data[index.row()][index.column()]
+
+    def rowCount(self, index):
+        
+        return len(self._data)
+
+    def columnCount(self, index):
+
+        return len(self._data[0])
 
 class SurveyPoint:
 
@@ -69,7 +106,7 @@ class SurveyData:
     def __init__( self , fileName):
 
         self.fileName = fileName
-        self.dataList = list()
+        self.dataDict = dict()
 
         try:
             with open(fileName) as fp:
@@ -79,8 +116,7 @@ class SurveyData:
                     entry = line.split(',')
 
                     point = SurveyPoint(int(entry[0]),float(entry[1]),float(entry[2]),float(entry[3]),entry[4])
-                    point.printPoint()
-                    self.dataList.append(point)
+                    self.dataDict[int(entry[0])] = point
 
         except ValueError:
 
@@ -88,7 +124,7 @@ class SurveyData:
 
     def getSurveyData(self):
 
-        return tuple(self.dataList)
+        return self.dataDict
 
 class Job(SurveyModel):
 
@@ -96,7 +132,6 @@ class Job(SurveyModel):
 
         super().__init__()
         self.jobName = jobName
-        self.currentFile = None
 
     def getJobName(self):
 

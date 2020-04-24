@@ -28,7 +28,7 @@
       </property>
       <widget class="QTabWidget" name="leftTabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="jobsTab">
         <property name="minimumSize">
@@ -54,81 +54,65 @@
         <attribute name="title">
          <string>Jobs</string>
         </attribute>
-        <widget class="QSplitter" name="splitter_3">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>301</width>
-           <height>431</height>
-          </rect>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <widget class="QFrame" name="jobListFrame">
-          <widget class="QWidget" name="">
-           <property name="geometry">
-            <rect>
-             <x>11</x>
-             <y>11</y>
-             <width>258</width>
-             <height>171</height>
-            </rect>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QSplitter" name="splitter_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-           <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QPushButton" name="newJobButton">
-                <property name="text">
-                 <string>New</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="newJobLineEdit"/>
-              </item>
-             </layout>
-            </item>
-            <item row="1" column="0">
-             <widget class="QListWidget" name="jobListWidget"/>
-            </item>
-           </layout>
+           <widget class="QFrame" name="jobListFrame">
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QPushButton" name="newJobButton">
+                   <property name="text">
+                    <string>New</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="newJobLineEdit"/>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="0">
+                <widget class="QListWidget" name="jobListWidget"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="currentJobWidget" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QPushButton" name="loadFileButton">
+                   <property name="text">
+                    <string>Load</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="loadFileLineEdit"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QListWidget" name="currentJobListWidget"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </widget>
-         </widget>
-         <widget class="QWidget" name="currentJobWidget" native="true">
-          <widget class="QWidget" name="">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>10</y>
-             <width>258</width>
-             <height>181</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QPushButton" name="loadFileButton">
-                <property name="text">
-                 <string>Load</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="loadFileLineEdit"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QListWidget" name="currentJobListWidget"/>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </widget>
+         </item>
+        </layout>
        </widget>
        <widget class="QWidget" name="setsTab">
         <property name="font">
@@ -139,73 +123,64 @@
         <attribute name="title">
          <string>Sets</string>
         </attribute>
-        <widget class="QSplitter" name="splitter_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>1</y>
-           <width>258</width>
-           <height>416</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <widget class="QWidget" name="">
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QSplitter" name="splitter_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QWidget" name="">
+            <layout class="QVBoxLayout" name="verticalLayout">
              <item>
-              <widget class="QPushButton" name="pushButton">
-               <property name="text">
-                <string>New</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="text">
+                  <string>New</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_2">
+                 <property name="text">
+                  <string>Load</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_3">
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
-               <property name="text">
-                <string>Load</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_3">
-               <property name="text">
-                <string>Save</string>
-               </property>
-              </widget>
+              <widget class="QTableWidget" name="setTableWidget"/>
              </item>
             </layout>
-           </item>
-           <item>
-            <widget class="QTableWidget" name="setTableWidget"/>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QTextEdit" name="setTextEdit"/>
-        </widget>
+           </widget>
+           <widget class="QTextEdit" name="setTextEdit"/>
+          </widget>
+         </item>
+        </layout>
        </widget>
        <widget class="QWidget" name="pointsTab">
         <attribute name="title">
          <string>Points</string>
         </attribute>
-        <widget class="QTableView" name="pointsTableView">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>271</width>
-           <height>431</height>
-          </rect>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QTableView" name="pointsTableView"/>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QQuickWidget" name="quickWidget">
@@ -285,7 +260,7 @@
   </connection>
   <connection>
    <sender>newJobLineEdit</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>returnPressed()</signal>
    <receiver>MainWindow</receiver>
    <slot>jobNameSlot()</slot>
    <hints>
@@ -317,7 +292,7 @@
   </connection>
   <connection>
    <sender>loadFileLineEdit</sender>
-   <signal>textEdited(QString)</signal>
+   <signal>returnPressed()</signal>
    <receiver>MainWindow</receiver>
    <slot>dataFilenameSlot()</slot>
    <hints>

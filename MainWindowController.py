@@ -8,12 +8,13 @@ class MainWindowUIClass( Ui_MainWindow ):
     def __init__(self):
 
         super().__init__()
-        self.jobList = list()
+        self.jobDict = dict()
         self.currentJob = Job()
 
     def setupUi(self, MW):
 
         super().setupUi( MW )
+        self.jobListWidget.clicked.connect(self.jobListClicked)
 
         qml_path = os.path.join(os.path.dirname(__file__), "map.qml")
         self.quickWidget.setSource(QtCore.QUrl.fromLocalFile(qml_path))
@@ -21,7 +22,7 @@ class MainWindowUIClass( Ui_MainWindow ):
     def debugPrint( self, msg ):
 
         self.debugTextBrowser.append( msg )
-        
+
     def newJobSlot(self):
 
         jobName = self.newJobLineEdit.text()
@@ -29,7 +30,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         if not (jobName == ''):
 
             self.currentJob = Job(jobName)
-            self.jobList.append(self.currentJob)
+            self.jobDict[jobName] = self.currentJob
             self.jobListWidget.addItem(jobName)
             self.refreshNewJob()
 
@@ -40,13 +41,21 @@ class MainWindowUIClass( Ui_MainWindow ):
         if not (jobName == ''):
 
             self.currentJob = Job(jobName)
-            self.jobList.append(self.currentJob)
+            self.jobDict[jobName] = self.currentJob
             self.jobListWidget.addItem(jobName)
             self.refreshNewJob()
 
     def refreshNewJob(self):
 
         self.newJobLineEdit.setText('')
+
+    def jobListClicked(self):
+
+        self.currentJob = self.jobDict[self.jobListWidget.currentItem().text()]
+        self.currentJobListWidget.clear()
+        self.currentJobListWidget.addItems(self.currentJob.fileNameList)
+
+        self.currentJob.getPointTable()
 
     def loadFileSlot(self):
   
@@ -61,6 +70,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         if fileName:
             self.currentJob.addFileName( fileName )
             self.currentJobListWidget.addItem(fileName)
+            self.pointsTableView.setModel(self.currentJob.getPointTable())            
             self.refreshCurrentJob()
 
     def dataFilenameSlot(self):
@@ -70,6 +80,7 @@ class MainWindowUIClass( Ui_MainWindow ):
         if self.currentJob.isValid( fileName ):
             self.currentJob.addFileName( self.loadFileLineEdit.text() )
             self.currentJobListWidget.addItem(fileName)
+            self.pointsTableView.setModel(self.currentJob.getPointTable())
             self.refreshCurrentJob()
         else:
             m = QtWidgets.QMessageBox()
